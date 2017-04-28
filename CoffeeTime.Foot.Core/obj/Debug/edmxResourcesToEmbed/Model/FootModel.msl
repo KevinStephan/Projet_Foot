@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FootModelStoreContainer" CdmEntityContainer="CoffeeTime_FootEntities">
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="FootModel.Article">
+        <MappingFragment StoreEntitySet="T_ARTICLE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleCategories">
+      <EntityTypeMapping TypeName="FootModel.ArticleCategory">
+        <MappingFragment StoreEntitySet="T_ARTICLE_CATEGORY">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="FootModel.Category">
+        <MappingFragment StoreEntitySet="T_CATEGORY">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FootModel.User">
+        <MappingFragment StoreEntitySet="T_USER">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="InscriptionDate" ColumnName="InscriptionDate" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Championships">
+      <EntityTypeMapping TypeName="FootModel.Championship">
+        <MappingFragment StoreEntitySet="T_CHAMPIONSHIP">
+          <ScalarProperty Name="PaysId" ColumnName="PaysId" />
+          <ScalarProperty Name="TiePts" ColumnName="TiePts" />
+          <ScalarProperty Name="DefeatPts" ColumnName="DefeatPts" />
+          <ScalarProperty Name="WinPts" ColumnName="WinPts" />
+          <ScalarProperty Name="TeamNumber" ColumnName="TeamNumber" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChampionshipTieRankings">
+      <EntityTypeMapping TypeName="FootModel.ChampionshipTieRanking">
+        <MappingFragment StoreEntitySet="T_CHAMPIONSHIP_TIE_RANKING">
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="RankingId" ColumnName="RankingId" />
+          <ScalarProperty Name="ChampionshipId" ColumnName="ChampionshipId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="FootModel.Comment">
+        <MappingFragment StoreEntitySet="T_COMMENT">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matchs">
+      <EntityTypeMapping TypeName="FootModel.Match">
+        <MappingFragment StoreEntitySet="T_MATCH">
+          <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+          <ScalarProperty Name="MatchNum" ColumnName="MatchNum" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Score2" ColumnName="Score2" />
+          <ScalarProperty Name="Score1" ColumnName="Score1" />
+          <ScalarProperty Name="Team2Id" ColumnName="Team2Id" />
+          <ScalarProperty Name="Team1Id" ColumnName="Team1Id" />
+          <ScalarProperty Name="DateMatch" ColumnName="DateMatch" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pays">
+      <EntityTypeMapping TypeName="FootModel.Pays">
+        <MappingFragment StoreEntitySet="T_PAYS">
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="FootModel.Role">
+        <MappingFragment StoreEntitySet="T_ROLE">
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seasons">
+      <EntityTypeMapping TypeName="FootModel.Season">
+        <MappingFragment StoreEntitySet="T_SEASON">
+          <ScalarProperty Name="ChampionshipId" ColumnName="ChampionshipId" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeasonTeams">
+      <EntityTypeMapping TypeName="FootModel.SeasonTeam">
+        <MappingFragment StoreEntitySet="T_SEASON_TEAM">
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+          <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="FootModel.Team">
+        <MappingFragment StoreEntitySet="T_TEAM">
+          <ScalarProperty Name="Trainer" ColumnName="Trainer" />
+          <ScalarProperty Name="StadiumCapacity" ColumnName="StadiumCapacity" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TieRankings">
+      <EntityTypeMapping TypeName="FootModel.TieRanking">
+        <MappingFragment StoreEntitySet="T_TIE_RANKING">
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

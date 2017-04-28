@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FootModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ArticleCategories" Relationship="Self.FK_T_ARTICLE_CATEGORY_T_ARTICLE" FromRole="T_ARTICLE" ToRole="T_ARTICLE_CATEGORY" />
+    <NavigationProperty Name="User" Relationship="Self.FK_T_ARTICLE_T_USER" FromRole="T_ARTICLE" ToRole="T_USER" />
+    <NavigationProperty Name="Comments" Relationship="FootModel.FK_T_COMMENT_T_ARTICLE" FromRole="Article" ToRole="T_COMMENT" />
+  </EntityType>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ArticleId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Article" Relationship="Self.FK_T_ARTICLE_CATEGORY_T_ARTICLE" FromRole="T_ARTICLE_CATEGORY" ToRole="T_ARTICLE" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_T_ARTICLE_CATEGORY_T_CATEGORY" FromRole="T_ARTICLE_CATEGORY" ToRole="T_CATEGORY" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ArticleCategories" Relationship="Self.FK_T_ARTICLE_CATEGORY_T_CATEGORY" FromRole="T_CATEGORY" ToRole="T_ARTICLE_CATEGORY" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="InscriptionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_T_ARTICLE_T_USER" FromRole="T_USER" ToRole="T_ARTICLE" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="FootModel.FK_T_COMMENT_T_USER" FromRole="User" ToRole="T_COMMENT" />
+    <NavigationProperty Name="Role" Relationship="FootModel.FK_T_USER_T_ROLE" FromRole="User" ToRole="T_ROLE" />
+  </EntityType>
+  <Association Name="FK_T_ARTICLE_CATEGORY_T_ARTICLE">
+    <End Role="T_ARTICLE" Type="FootModel.Article" Multiplicity="1" />
+    <End Role="T_ARTICLE_CATEGORY" Type="FootModel.ArticleCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_ARTICLE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_ARTICLE_CATEGORY">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_ARTICLE_T_USER">
+    <End Role="T_USER" Type="FootModel.User" Multiplicity="1" />
+    <End Role="T_ARTICLE" Type="FootModel.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_USER">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_ARTICLE">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_ARTICLE_CATEGORY_T_CATEGORY">
+    <End Role="T_CATEGORY" Type="FootModel.Category" Multiplicity="1" />
+    <End Role="T_ARTICLE_CATEGORY" Type="FootModel.ArticleCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_CATEGORY">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_ARTICLE_CATEGORY">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CoffeeTime_FootEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articles" EntityType="FootModel.Article" />
+    <EntitySet Name="ArticleCategories" EntityType="FootModel.ArticleCategory" />
+    <EntitySet Name="Categories" EntityType="FootModel.Category" />
+    <EntitySet Name="Users" EntityType="FootModel.User" />
+    <AssociationSet Name="FK_T_ARTICLE_CATEGORY_T_ARTICLE" Association="Self.FK_T_ARTICLE_CATEGORY_T_ARTICLE">
+      <End Role="T_ARTICLE" EntitySet="Articles" />
+      <End Role="T_ARTICLE_CATEGORY" EntitySet="ArticleCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_ARTICLE_T_USER" Association="Self.FK_T_ARTICLE_T_USER">
+      <End Role="T_USER" EntitySet="Users" />
+      <End Role="T_ARTICLE" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_ARTICLE_CATEGORY_T_CATEGORY" Association="Self.FK_T_ARTICLE_CATEGORY_T_CATEGORY">
+      <End Role="T_CATEGORY" EntitySet="Categories" />
+      <End Role="T_ARTICLE_CATEGORY" EntitySet="ArticleCategories" />
+    </AssociationSet>
+    <EntitySet Name="Championships" EntityType="FootModel.Championship" />
+    <EntitySet Name="ChampionshipTieRankings" EntityType="FootModel.ChampionshipTieRanking" />
+    <EntitySet Name="Comments" EntityType="FootModel.Comment" />
+    <EntitySet Name="Matchs" EntityType="FootModel.Match" />
+    <EntitySet Name="Pays" EntityType="FootModel.Pays" />
+    <EntitySet Name="Roles" EntityType="FootModel.Role" />
+    <EntitySet Name="Seasons" EntityType="FootModel.Season" />
+    <EntitySet Name="SeasonTeams" EntityType="FootModel.SeasonTeam" />
+    <EntitySet Name="Teams" EntityType="FootModel.Team" />
+    <EntitySet Name="TieRankings" EntityType="FootModel.TieRanking" />
+    <AssociationSet Name="FK_T_COMMENT_T_ARTICLE" Association="FootModel.FK_T_COMMENT_T_ARTICLE">
+      <End Role="Article" EntitySet="Articles" />
+      <End Role="T_COMMENT" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_CHAMPIONSHIP_T_PAYS" Association="FootModel.FK_T_CHAMPIONSHIP_T_PAYS">
+      <End Role="T_PAYS" EntitySet="Pays" />
+      <End Role="T_CHAMPIONSHIP" EntitySet="Championships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_CHAMPIONSHIP_TIE_RANKING_T_CHAMPIONSHIP" Association="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_CHAMPIONSHIP">
+      <End Role="T_CHAMPIONSHIP" EntitySet="Championships" />
+      <End Role="T_CHAMPIONSHIP_TIE_RANKING" EntitySet="ChampionshipTieRankings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SEASON_T_CHAMPIONSHIP" Association="FootModel.FK_T_SEASON_T_CHAMPIONSHIP">
+      <End Role="T_CHAMPIONSHIP" EntitySet="Championships" />
+      <End Role="T_SEASON" EntitySet="Seasons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_CHAMPIONSHIP_TIE_RANKING_T_TIE_RANKING" Association="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_TIE_RANKING">
+      <End Role="T_TIE_RANKING" EntitySet="TieRankings" />
+      <End Role="T_CHAMPIONSHIP_TIE_RANKING" EntitySet="ChampionshipTieRankings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_COMMENT_T_USER" Association="FootModel.FK_T_COMMENT_T_USER">
+      <End Role="User" EntitySet="Users" />
+      <End Role="T_COMMENT" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_MATCH_T_SEASON" Association="FootModel.FK_T_MATCH_T_SEASON">
+      <End Role="T_SEASON" EntitySet="Seasons" />
+      <End Role="T_MATCH" EntitySet="Matchs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_MATCH_T_TEAM" Association="FootModel.FK_T_MATCH_T_TEAM">
+      <End Role="T_TEAM" EntitySet="Teams" />
+      <End Role="T_MATCH" EntitySet="Matchs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_MATCH_T_TEAM1" Association="FootModel.FK_T_MATCH_T_TEAM1">
+      <End Role="T_TEAM" EntitySet="Teams" />
+      <End Role="T_MATCH" EntitySet="Matchs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_USER_T_ROLE" Association="FootModel.FK_T_USER_T_ROLE">
+      <End Role="T_ROLE" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SEASON_TEAM_T_SEASON" Association="FootModel.FK_T_SEASON_TEAM_T_SEASON">
+      <End Role="T_SEASON" EntitySet="Seasons" />
+      <End Role="T_SEASON_TEAM" EntitySet="SeasonTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SEASON_TEAM_T_TEAM" Association="FootModel.FK_T_SEASON_TEAM_T_TEAM">
+      <End Role="T_TEAM" EntitySet="Teams" />
+      <End Role="T_SEASON_TEAM" EntitySet="SeasonTeams" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Championship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TeamNumber" Type="Int32" Nullable="false" />
+    <Property Name="WinPts" Type="Int32" Nullable="false" />
+    <Property Name="DefeatPts" Type="Int32" Nullable="false" />
+    <Property Name="TiePts" Type="Int32" Nullable="false" />
+    <Property Name="PaysId" Type="Int32" />
+    <NavigationProperty Name="Pays" Relationship="FootModel.FK_T_CHAMPIONSHIP_T_PAYS" FromRole="T_CHAMPIONSHIP" ToRole="T_PAYS" />
+    <NavigationProperty Name="ChampionshipTieRanking" Relationship="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_CHAMPIONSHIP" FromRole="T_CHAMPIONSHIP" ToRole="T_CHAMPIONSHIP_TIE_RANKING" />
+    <NavigationProperty Name="Season" Relationship="FootModel.FK_T_SEASON_T_CHAMPIONSHIP" FromRole="T_CHAMPIONSHIP" ToRole="T_SEASON" />
+  </EntityType>
+  <EntityType Name="ChampionshipTieRanking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChampionshipId" Type="Int32" Nullable="false" />
+    <Property Name="RankingId" Type="Int32" Nullable="false" />
+    <Property Name="Rank" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Championship" Relationship="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_CHAMPIONSHIP" FromRole="T_CHAMPIONSHIP_TIE_RANKING" ToRole="T_CHAMPIONSHIP" />
+    <NavigationProperty Name="TieRanking" Relationship="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_TIE_RANKING" FromRole="T_CHAMPIONSHIP_TIE_RANKING" ToRole="T_TIE_RANKING" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ArticleId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Article" Relationship="FootModel.FK_T_COMMENT_T_ARTICLE" FromRole="T_COMMENT" ToRole="Article" />
+    <NavigationProperty Name="User" Relationship="FootModel.FK_T_COMMENT_T_USER" FromRole="T_COMMENT" ToRole="User" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Match">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateMatch" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Team1Id" Type="Int32" Nullable="false" />
+    <Property Name="Team2Id" Type="Int32" Nullable="false" />
+    <Property Name="Score1" Type="Int32" />
+    <Property Name="Score2" Type="Int32" />
+    <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MatchNum" Type="Int32" Nullable="false" />
+    <Property Name="SeasonId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Season" Relationship="FootModel.FK_T_MATCH_T_SEASON" FromRole="T_MATCH" ToRole="T_SEASON" />
+    <NavigationProperty Name="Team1" Relationship="FootModel.FK_T_MATCH_T_TEAM" FromRole="T_MATCH" ToRole="T_TEAM" />
+    <NavigationProperty Name="Team2" Relationship="FootModel.FK_T_MATCH_T_TEAM1" FromRole="T_MATCH" ToRole="T_TEAM" />
+  </EntityType>
+  <EntityType Name="Pays">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Championship" Relationship="FootModel.FK_T_CHAMPIONSHIP_T_PAYS" FromRole="T_PAYS" ToRole="T_CHAMPIONSHIP" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="FootModel.FK_T_USER_T_ROLE" FromRole="T_ROLE" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Season">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="ChampionshipId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Championship" Relationship="FootModel.FK_T_SEASON_T_CHAMPIONSHIP" FromRole="T_SEASON" ToRole="T_CHAMPIONSHIP" />
+    <NavigationProperty Name="Match" Relationship="FootModel.FK_T_MATCH_T_SEASON" FromRole="T_SEASON" ToRole="T_MATCH" />
+    <NavigationProperty Name="SeasonTeam" Relationship="FootModel.FK_T_SEASON_TEAM_T_SEASON" FromRole="T_SEASON" ToRole="T_SEASON_TEAM" />
+  </EntityType>
+  <EntityType Name="SeasonTeam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SeasonId" Type="Int32" Nullable="false" />
+    <Property Name="TeamId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Season" Relationship="FootModel.FK_T_SEASON_TEAM_T_SEASON" FromRole="T_SEASON_TEAM" ToRole="T_SEASON" />
+    <NavigationProperty Name="Team" Relationship="FootModel.FK_T_SEASON_TEAM_T_TEAM" FromRole="T_SEASON_TEAM" ToRole="T_TEAM" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StadiumCapacity" Type="Int32" Nullable="false" />
+    <Property Name="Trainer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MatchAsTeam1" Relationship="FootModel.FK_T_MATCH_T_TEAM" FromRole="T_TEAM" ToRole="T_MATCH" />
+    <NavigationProperty Name="MatchAsTeam2" Relationship="FootModel.FK_T_MATCH_T_TEAM1" FromRole="T_TEAM" ToRole="T_MATCH" />
+    <NavigationProperty Name="SeasonTeam" Relationship="FootModel.FK_T_SEASON_TEAM_T_TEAM" FromRole="T_TEAM" ToRole="T_SEASON_TEAM" />
+  </EntityType>
+  <EntityType Name="TieRanking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ChampionshipTieRanking" Relationship="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_TIE_RANKING" FromRole="T_TIE_RANKING" ToRole="T_CHAMPIONSHIP_TIE_RANKING" />
+  </EntityType>
+  <Association Name="FK_T_COMMENT_T_ARTICLE">
+    <End Type="FootModel.Article" Role="Article" Multiplicity="1" />
+    <End Type="FootModel.Comment" Role="T_COMMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_COMMENT">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_CHAMPIONSHIP_T_PAYS">
+    <End Type="FootModel.Pays" Role="T_PAYS" Multiplicity="0..1" />
+    <End Type="FootModel.Championship" Role="T_CHAMPIONSHIP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_PAYS">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_CHAMPIONSHIP">
+        <PropertyRef Name="PaysId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_CHAMPIONSHIP_TIE_RANKING_T_CHAMPIONSHIP">
+    <End Type="FootModel.Championship" Role="T_CHAMPIONSHIP" Multiplicity="1" />
+    <End Type="FootModel.ChampionshipTieRanking" Role="T_CHAMPIONSHIP_TIE_RANKING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_CHAMPIONSHIP">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_CHAMPIONSHIP_TIE_RANKING">
+        <PropertyRef Name="ChampionshipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SEASON_T_CHAMPIONSHIP">
+    <End Type="FootModel.Championship" Role="T_CHAMPIONSHIP" Multiplicity="1" />
+    <End Type="FootModel.Season" Role="T_SEASON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_CHAMPIONSHIP">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_SEASON">
+        <PropertyRef Name="ChampionshipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_CHAMPIONSHIP_TIE_RANKING_T_TIE_RANKING">
+    <End Type="FootModel.TieRanking" Role="T_TIE_RANKING" Multiplicity="1" />
+    <End Type="FootModel.ChampionshipTieRanking" Role="T_CHAMPIONSHIP_TIE_RANKING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_TIE_RANKING">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_CHAMPIONSHIP_TIE_RANKING">
+        <PropertyRef Name="RankingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_COMMENT_T_USER">
+    <End Type="FootModel.User" Role="User" Multiplicity="1" />
+    <End Type="FootModel.Comment" Role="T_COMMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_COMMENT">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_MATCH_T_SEASON">
+    <End Type="FootModel.Season" Role="T_SEASON" Multiplicity="1" />
+    <End Type="FootModel.Match" Role="T_MATCH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_SEASON">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_MATCH">
+        <PropertyRef Name="SeasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_MATCH_T_TEAM">
+    <End Type="FootModel.Team" Role="T_TEAM" Multiplicity="1" />
+    <End Type="FootModel.Match" Role="T_MATCH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_TEAM">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_MATCH">
+        <PropertyRef Name="Team1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_MATCH_T_TEAM1">
+    <End Type="FootModel.Team" Role="T_TEAM" Multiplicity="1" />
+    <End Type="FootModel.Match" Role="T_MATCH" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_TEAM">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_MATCH">
+        <PropertyRef Name="Team2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_USER_T_ROLE">
+    <End Type="FootModel.Role" Role="T_ROLE" Multiplicity="1" />
+    <End Type="FootModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_ROLE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SEASON_TEAM_T_SEASON">
+    <End Type="FootModel.Season" Role="T_SEASON" Multiplicity="1" />
+    <End Type="FootModel.SeasonTeam" Role="T_SEASON_TEAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_SEASON">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_SEASON_TEAM">
+        <PropertyRef Name="SeasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SEASON_TEAM_T_TEAM">
+    <End Type="FootModel.Team" Role="T_TEAM" Multiplicity="1" />
+    <End Type="FootModel.SeasonTeam" Role="T_SEASON_TEAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_TEAM">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_SEASON_TEAM">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

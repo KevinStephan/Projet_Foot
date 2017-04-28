@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d659c616656340b48b403f326cb48c6b" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="FootModel.Article" Width="1.5" PointX="5.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootModel.ArticleCategory" Width="1.5" PointX="4.625" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootModel.Category" Width="1.5" PointX="4.625" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootModel.User" Width="1.5" PointX="2.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="FootModel.FK_T_ARTICLE_CATEGORY_T_ARTICLE" ManuallyRouted="false" />
+        <AssociationConnector Association="FootModel.FK_T_ARTICLE_T_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="FootModel.FK_T_ARTICLE_CATEGORY_T_CATEGORY" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FootModel.Championship" Width="1.5" PointX="14.875" PointY="7" />
+        <EntityTypeShape EntityType="FootModel.ChampionshipTieRanking" Width="1.5" PointX="21" PointY="6.75" />
+        <EntityTypeShape EntityType="FootModel.Comment" Width="1.5" PointX="8.25" PointY="1.625" />
+        <EntityTypeShape EntityType="FootModel.Match" Width="1.5" PointX="15.5" PointY="0.5" />
+        <EntityTypeShape EntityType="FootModel.Pays" Width="1.5" PointX="11" PointY="8.375" />
+        <EntityTypeShape EntityType="FootModel.Role" Width="1.5" PointX="2.125" PointY="4.875" />
+        <EntityTypeShape EntityType="FootModel.Season" Width="1.5" PointX="17.875" PointY="4.125" />
+        <EntityTypeShape EntityType="FootModel.SeasonTeam" Width="1.5" PointX="12" PointY="5" />
+        <EntityTypeShape EntityType="FootModel.Team" Width="1.5" PointX="11.375" PointY="1.875" />
+        <EntityTypeShape EntityType="FootModel.TieRanking" Width="1.5" PointX="21.25" PointY="4.375" />
+        <AssociationConnector Association="FootModel.FK_T_COMMENT_T_ARTICLE" />
+        <AssociationConnector Association="FootModel.FK_T_CHAMPIONSHIP_T_PAYS" />
+        <AssociationConnector Association="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_CHAMPIONSHIP" />
+        <AssociationConnector Association="FootModel.FK_T_SEASON_T_CHAMPIONSHIP" />
+        <AssociationConnector Association="FootModel.FK_T_CHAMPIONSHIP_TIE_RANKING_T_TIE_RANKING" />
+        <AssociationConnector Association="FootModel.FK_T_COMMENT_T_USER" />
+        <AssociationConnector Association="FootModel.FK_T_MATCH_T_SEASON" />
+        <AssociationConnector Association="FootModel.FK_T_MATCH_T_TEAM" />
+        <AssociationConnector Association="FootModel.FK_T_MATCH_T_TEAM1" />
+        <AssociationConnector Association="FootModel.FK_T_USER_T_ROLE" />
+        <AssociationConnector Association="FootModel.FK_T_SEASON_TEAM_T_SEASON" />
+        <AssociationConnector Association="FootModel.FK_T_SEASON_TEAM_T_TEAM" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

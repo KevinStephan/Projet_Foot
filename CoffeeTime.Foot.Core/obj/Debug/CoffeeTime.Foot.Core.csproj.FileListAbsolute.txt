@@ -1,0 +1,10 @@
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\obj\Debug\CoffeeTime.Foot.Core.csprojResolveAssemblyReference.cache
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\CoffeeTime.Foot.Core.dll.config
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\CoffeeTime.Foot.Core.dll
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\CoffeeTime.Foot.Core.pdb
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\EntityFramework.dll
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\EntityFramework.xml
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\obj\Debug\CoffeeTime.Foot.Core.dll
+c:\users\kev29\documents\visual studio 2015\Projects\CoffeeTime.Foot\CoffeeTime.Foot.Core\obj\Debug\CoffeeTime.Foot.Core.pdb
