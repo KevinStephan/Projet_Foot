@@ -1,0 +1,5 @@
+projectKey=org.sonarqube:Projet_Foot
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/org.sonarqube:Projet_Foot
+ceTaskId=AVv2MRjipesh31xhy6cE
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVv2MRjipesh31xhy6cE
